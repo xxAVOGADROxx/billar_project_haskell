@@ -1,0 +1,15 @@
+Configuring gloss-rendering-1.12.0.0...
+Preprocessing library for gloss-rendering-1.12.0.0..
+Building library for gloss-rendering-1.12.0.0..
+[1 of 9] Compiling Graphics.Gloss.Internals.Data.Color ( Graphics/Gloss/Internals/Data/Color.hs, .stack-work/dist/x86_64-linux/Cabal-2.2.0.1/build/Graphics/Gloss/Internals/Data/Color.o )
+[2 of 9] Compiling Graphics.Gloss.Internals.Rendering.Bitmap ( Graphics/Gloss/Internals/Rendering/Bitmap.hs, .stack-work/dist/x86_64-linux/Cabal-2.2.0.1/build/Graphics/Gloss/Internals/Rendering/Bitmap.o )
+[3 of 9] Compiling Graphics.Gloss.Internals.Data.Picture ( Graphics/Gloss/Internals/Data/Picture.hs, .stack-work/dist/x86_64-linux/Cabal-2.2.0.1/build/Graphics/Gloss/Internals/Data/Picture.o )
+[4 of 9] Compiling Graphics.Gloss.Internals.Rendering.Color ( Graphics/Gloss/Internals/Rendering/Color.hs, .stack-work/dist/x86_64-linux/Cabal-2.2.0.1/build/Graphics/Gloss/Internals/Rendering/Color.o )
+[5 of 9] Compiling Graphics.Gloss.Internals.Rendering.Common ( Graphics/Gloss/Internals/Rendering/Common.hs, .stack-work/dist/x86_64-linux/Cabal-2.2.0.1/build/Graphics/Gloss/Internals/Rendering/Common.o )
+[6 of 9] Compiling Graphics.Gloss.Internals.Rendering.Circle ( Graphics/Gloss/Internals/Rendering/Circle.hs, .stack-work/dist/x86_64-linux/Cabal-2.2.0.1/build/Graphics/Gloss/Internals/Rendering/Circle.o )
+[7 of 9] Compiling Graphics.Gloss.Internals.Rendering.State ( Graphics/Gloss/Internals/Rendering/State.hs, .stack-work/dist/x86_64-linux/Cabal-2.2.0.1/build/Graphics/Gloss/Internals/Rendering/State.o )
+[8 of 9] Compiling Graphics.Gloss.Internals.Rendering.Picture ( Graphics/Gloss/Internals/Rendering/Picture.hs, .stack-work/dist/x86_64-linux/Cabal-2.2.0.1/build/Graphics/Gloss/Internals/Rendering/Picture.o )
+[9 of 9] Compiling Graphics.Gloss.Rendering ( Graphics/Gloss/Rendering.hs, .stack-work/dist/x86_64-linux/Cabal-2.2.0.1/build/Graphics/Gloss/Rendering.o )
+ignoring (possibly broken) abi-depends field for packages
+Installing library in /home/niar/.stack/snapshots/x86_64-linux/lts-12.13/8.4.3/lib/x86_64-linux-ghc-8.4.3/gloss-rendering-1.12.0.0-Fz7STw6NPZ9xgyuHfAgOy
+Registering library for gloss-rendering-1.12.0.0..

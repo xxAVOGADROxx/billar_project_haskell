@@ -1,0 +1,7 @@
+Configuring half-0.3...
+Preprocessing library for half-0.3..
+Building library for half-0.3..
+[1 of 1] Compiling Numeric.Half     ( src/Numeric/Half.hs, .stack-work/dist/x86_64-linux/Cabal-2.2.0.1/build/Numeric/Half.o )
+ignoring (possibly broken) abi-depends field for packages
+Installing library in /home/niar/.stack/snapshots/x86_64-linux/lts-12.13/8.4.3/lib/x86_64-linux-ghc-8.4.3/half-0.3-EQ7sL9Ks8Aw3nSS1eqfMFq
+Registering library for half-0.3..

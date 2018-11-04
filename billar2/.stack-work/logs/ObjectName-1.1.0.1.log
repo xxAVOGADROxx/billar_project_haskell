@@ -1,0 +1,7 @@
+Configuring ObjectName-1.1.0.1...
+Preprocessing library for ObjectName-1.1.0.1..
+Building library for ObjectName-1.1.0.1..
+[1 of 1] Compiling Data.ObjectName  ( src/Data/ObjectName.hs, .stack-work/dist/x86_64-linux/Cabal-2.2.0.1/build/Data/ObjectName.o )
+ignoring (possibly broken) abi-depends field for packages
+Installing library in /home/niar/.stack/snapshots/x86_64-linux/lts-12.13/8.4.3/lib/x86_64-linux-ghc-8.4.3/ObjectName-1.1.0.1-CHN2W1qj7Kj3K9d7qtMTxi
+Registering library for ObjectName-1.1.0.1..
