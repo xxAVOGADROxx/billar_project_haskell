@@ -1,0 +1,7 @@
+cabal: Entering directory '/tmp/cabal-tmp-9872/half-0.3'
+Configuring half-0.3...
+Preprocessing library for half-0.3..
+Building library for half-0.3..
+[1 of 1] Compiling Numeric.Half     ( src/Numeric/Half.hs, dist/dist-sandbox-b8796660/build/Numeric/Half.o )
+Installing library in /home/seraquive/Documents/8.-semester/programacion_funcional/proyecto/billar2/.cabal-sandbox/lib/x86_64-linux-ghc-8.4.4/half-0.3-EQ7sL9Ks8Aw3nSS1eqfMFq
+cabal: Leaving directory '/tmp/cabal-tmp-9872/half-0.3'

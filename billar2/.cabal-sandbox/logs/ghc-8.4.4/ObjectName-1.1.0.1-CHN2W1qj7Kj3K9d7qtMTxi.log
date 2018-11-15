@@ -1,0 +1,7 @@
+cabal: Entering directory '/tmp/cabal-tmp-9873/ObjectName-1.1.0.1'
+Configuring ObjectName-1.1.0.1...
+Preprocessing library for ObjectName-1.1.0.1..
+Building library for ObjectName-1.1.0.1..
+[1 of 1] Compiling Data.ObjectName  ( src/Data/ObjectName.hs, dist/dist-sandbox-b8796660/build/Data/ObjectName.o )
+Installing library in /home/seraquive/Documents/8.-semester/programacion_funcional/proyecto/billar2/.cabal-sandbox/lib/x86_64-linux-ghc-8.4.4/ObjectName-1.1.0.1-CHN2W1qj7Kj3K9d7qtMTxi
+cabal: Leaving directory '/tmp/cabal-tmp-9873/ObjectName-1.1.0.1'

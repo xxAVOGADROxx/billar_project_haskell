@@ -1,0 +1,7 @@
+cabal: Entering directory '/tmp/cabal-tmp-9873/StateVar-1.1.1.1'
+Configuring StateVar-1.1.1.1...
+Preprocessing library for StateVar-1.1.1.1..
+Building library for StateVar-1.1.1.1..
+[1 of 1] Compiling Data.StateVar    ( src/Data/StateVar.hs, dist/dist-sandbox-b8796660/build/Data/StateVar.o )
+Installing library in /home/seraquive/Documents/8.-semester/programacion_funcional/proyecto/billar2/.cabal-sandbox/lib/x86_64-linux-ghc-8.4.4/StateVar-1.1.1.1-95mVnsqAWWrCsY5lrWtwY9
+cabal: Leaving directory '/tmp/cabal-tmp-9873/StateVar-1.1.1.1'

@@ -1,0 +1,24 @@
+
+package: gloss-1.12.0.0
+os: linux
+arch: x86_64
+compiler: ghc-8.4.4
+client: cabal-install-2.4.0.0
+flags: -explicitbackend -glfw glut
+dependencies: GLUT-2.7.0.14 OpenGL-3.0.2.2 base-4.11.1.0
+              bmp-1.2.6.3 bytestring-0.10.8.2 containers-0.5.11.0
+              ghc-prim-0.5.2.0 gloss-rendering-1.12.0.0
+install-outcome: InstallOk
+docs-outcome: NotTried
+tests-outcome: NotTried
+
+package: gloss-rendering-1.12.0.0
+os: linux
+arch: x86_64
+compiler: ghc-8.4.4
+client: cabal-install-2.4.0.0
+dependencies: GLUT-2.7.0.14 OpenGL-3.0.2.2 base-4.11.1.0
+              bmp-1.2.6.3 bytestring-0.10.8.2 containers-0.5.11.0
+install-outcome: InstallOk
+docs-outcome: NotTried
+tests-outcome: NotTried

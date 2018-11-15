@@ -1,0 +1,12 @@
+cabal: Entering directory '/tmp/cabal-tmp-9872/GLURaw-2.0.0.4'
+Configuring GLURaw-2.0.0.4...
+Preprocessing library for GLURaw-2.0.0.4..
+Building library for GLURaw-2.0.0.4..
+[1 of 6] Compiling Graphics.GLU.Callbacks ( src/Graphics/GLU/Callbacks.hs, dist/dist-sandbox-b8796660/build/Graphics/GLU/Callbacks.o )
+[2 of 6] Compiling Graphics.GLU.Tokens ( src/Graphics/GLU/Tokens.hs, dist/dist-sandbox-b8796660/build/Graphics/GLU/Tokens.o )
+[3 of 6] Compiling Graphics.GLU.TypesInternal ( src/Graphics/GLU/TypesInternal.hs, dist/dist-sandbox-b8796660/build/Graphics/GLU/TypesInternal.o )
+[4 of 6] Compiling Graphics.GLU.Types ( src/Graphics/GLU/Types.hs, dist/dist-sandbox-b8796660/build/Graphics/GLU/Types.o )
+[5 of 6] Compiling Graphics.GLU.Functions ( src/Graphics/GLU/Functions.hs, dist/dist-sandbox-b8796660/build/Graphics/GLU/Functions.o )
+[6 of 6] Compiling Graphics.GLU     ( src/Graphics/GLU.hs, dist/dist-sandbox-b8796660/build/Graphics/GLU.o )
+Installing library in /home/seraquive/Documents/8.-semester/programacion_funcional/proyecto/billar2/.cabal-sandbox/lib/x86_64-linux-ghc-8.4.4/GLURaw-2.0.0.4-2zVYOHVgn4k9zESe3vuQlS
+cabal: Leaving directory '/tmp/cabal-tmp-9872/GLURaw-2.0.0.4'
