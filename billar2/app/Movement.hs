@@ -1,8 +1,13 @@
 module Movement where 
 import Vec
+import Debug.Trace
 
 gravity :: Float
 gravity = 9.8
+
+width, height:: Float
+width = 600
+height = 300
 
 data Ball = Ball {identifier  :: Int,
         radio       :: Float,
@@ -60,6 +65,15 @@ choque t ball1@(Ball id1 rad1 _ _ _ _ _ pos1) ball2@(Ball id2 rad2 _ _ _ _ _ pos
 comprobarChoque :: Float -> Ball -> [Ball] -> [Ball]
 comprobarChoque t ball1 balls = take 1 $ [ball | ball<-balls, choque t ball1 ball]
 
+comprobarChoqueWall :: Float -> Ball -> (Bool,Ball)
+comprobarChoqueWall t pelota@(Ball _ r _ _ _ (Vec accX accY) (Vec velX velY) (Vec x y))
+    |y > 0 && (height/2 - y) < r && (height/2 - ny) < (height/2 - y) = (True,pelota{acceleration = (Vec accX (-accY)),velocity = (Vec velX (-velY))})
+    |y < 0 && (height/2 + y) < r && (height/2 + ny) < (height/2 + y) = (True,pelota{acceleration = (Vec accX (-accY)),velocity = (Vec velX (-velY))})
+    |x > 0 && (width/2 - x) < r && (width/2 - nx) < (width/2 - x) = (True,pelota{acceleration = (Vec (-accX) accY),velocity = (Vec (-velX) velY)})
+    |x < 0 && (width/2 + x) < r && (width/2 + nx) < (width/2 + x) = (True,pelota{acceleration = (Vec (-accX) accY),velocity = (Vec (-velX) velY)})
+    |otherwise = (False,pelota)
+    where (Ball _ _ _ _ _ _ _ (Vec nx ny)) = moveBall t pelota
+
 
 manageChoque :: Float -> Ball -> Ball -> [Ball] -> [Ball]
 manageChoque t ball1 ball2 balls = reemplazarPelota newball2 $ reemplazarPelota newball1 balls
@@ -77,9 +91,11 @@ cambiarVelocidadesPelotas ball1@(Ball _ _ _ _ _ _ x pos1) ball2@(Ball _ _ _ _ _ 
 
 iterationBall :: Float -> Ball -> [Ball] -> [Ball]
 iterationBall t ball balls
-    |choqueBalls == [] = reemplazarPelota (moveBall t ball) balls
+    |choqueBallsWall =   (reemplazarPelota nball balls)
+    |choqueBalls == [] = (reemplazarPelota (moveBall t ball) balls)
     |otherwise = manageChoque t ball (head choqueBalls) balls
-    where choqueBalls = comprobarChoque t ball balls
+    where   choqueBalls = comprobarChoque t ball balls
+            (choqueBallsWall,nball) = comprobarChoqueWall t ball
 
 
 iteration :: Float -> [Ball] -> [Ball] -> [Ball]

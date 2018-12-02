@@ -9,13 +9,9 @@ import Movement
 import Vec
 
 -- |Parameters
-width, height:: Float
+
 offset :: Int
-
-width = 600
-height = 300
 offset = 200
-
 
 -- | Initial window
 window :: Display
@@ -38,10 +34,11 @@ initialTaco = Taco (Vec 0 0) 15 (Vec 10 50) (Vec 15 200) 10
 
 
 initialBalls :: [Ball]
-initialBalls = [acelBall (Ball 1 10 20 0.5 [1,0,0,1] (Vec 0 0) (Vec (60) (24)) (Vec (-50) (-10))),
+initialBalls = [acelBall (Ball 1 10 20 0.5 [1,0,0,1] (Vec 0 0) (Vec (120) (48)) (Vec (-50) (-10))),
                 (Ball 2 10 20 0.5 [0,1,0,1] (Vec 0 0) (Vec 0 0) (Vec 10 20)),
                 (Ball 3 10 20 0.5 [0,0,1,1] (Vec 0 0) (Vec 0 0) (Vec 60 90)),
                 (Ball 4 10 20 0.5 [1,0,1,1] (Vec 0 0) (Vec 0 0) (Vec 0 0))]
+
 
 initialTable :: Table
 initialTable = (Table width height)
@@ -64,14 +61,15 @@ drawOneBall :: Ball -> Picture
 drawOneBall (Ball _ r _ _ col _ _ (Vec x y) ) = translate x y $  G.color ballColor $ G.circleSolid r
                                where ballColor = C.makeColor (col!!0) (col!!1) (col!!2) (col!!3)
 
-toPictureTaco :: Float -> Float -> Float -> Float -> Float -> Float -> Vec -> [Picture]
-toPictureTaco p x y a b r z =  [ translate x y $ rotate r $ G.color( mixColors 40 60 green red) $ G.rectangleUpperSolid a b] ++ [ translate x y $ rotate (r+180) $ G.color black  $ G.rectangleUpperSolid a p]
+toPictureTaco :: Table -> Taco -> [Picture]
+toPictureTaco (Table w h) (Taco z p (Vec x y) (Vec a b) r ) = [ translate x y $ Scale (w/width) (h/height) $ rotate r $ G.color( mixColors 40 60 green red) $ G.rectangleUpperSolid a b] ++ [ translate x y $ Scale (w/width) (h/height) $ rotate (r+180) $ G.color black  $ G.rectangleUpperSolid a p]
                                
 adjuste :: Table -> Picture -> Picture
 adjuste (Table w h) pic = Scale (w/width) (h/height) pic
 
 toPicture :: State -> Picture
-toPicture (State pelotas (Taco z p (Vec x y) (Vec a b) r ) tab) = adjuste tab $ pictures $  [G.color (C.makeColor 0 0.25 0 1)  $rectangleSolid width height] ++ map drawOneBall pelotas ++ toPictureTaco p x y a b r z
+toPicture (State pelotas tac tab) = pictures $ [adjuste tab (pictures $ mesa ++ map drawOneBall pelotas)] ++ (toPictureTaco tab tac)
+  where mesa = [G.color (C.makeColor 0 0.25 0 1)  $rectangleSolid width height]
 
 
 -- | Movement of the balls
