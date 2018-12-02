@@ -2,7 +2,7 @@ module Movement where
 import Vec
 
 gravity :: Float
-gravity = 20
+gravity = 9.8
 
 data Ball = Ball {identifier  :: Int,
         radio       :: Float,
