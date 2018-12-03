@@ -5,6 +5,7 @@ module Main where
 import Graphics.Gloss.Data.Color as C
 import Graphics.Gloss.Data.Picture as G
 import Graphics.Gloss.Interface.Pure.Game
+import Debug.Trace
 import Movement
 import Vec
 
@@ -30,11 +31,12 @@ initialGame = State initialBalls initialTaco initialTable
 
 --initial items in the game
 initialTaco :: Taco
-initialTaco = Taco (Vec 0 0) 15 (Vec 10 50) (Vec 15 200) 10
+-- initialTaco = Taco (Vec 0 0) 15 (Vec 10 50) (Vec 15 200) 10
+initialTaco = Taco (Vec 0 0) 15 (Vec 10 50) (Vec 5 200) 10
 
 
 initialBalls :: [Ball]
-initialBalls = [acelBall (Ball 1 10 20 0.5 [1,0,0,1] (Vec 0 0) (Vec (120) (48)) (Vec (-50) (-10))),
+initialBalls = [(Ball 1 10 20 0.5 [1,0,0,1] (Vec 0 0) (Vec 0 0) (Vec (-50) (-10))),
                 (Ball 2 10 20 0.5 [0,1,0,1] (Vec 0 0) (Vec 0 0) (Vec 10 20)),
                 (Ball 3 10 20 0.5 [0,0,1,1] (Vec 0 0) (Vec 0 0) (Vec 60 90)),
                 (Ball 4 10 20 0.5 [1,0,1,1] (Vec 0 0) (Vec 0 0) (Vec 0 0))]
@@ -56,6 +58,20 @@ newSize (a,b) state
         rx = na/width
         ry = nb/height
 
+dis :: Vec -> Ball -> Bool
+dis punta ball = (trace (show distancia) distancia)< (radio ball)
+  where distancia = distance (position ball) punta
+
+hitTaco :: State -> (Float,Float) -> State
+hitTaco estado@(State balls (Taco _ p _ (Vec _ b) angle) _) (x,y)
+  |hits == [] = estado
+  |otherwise = estado{pool = reemplazarPelota (acelBall pelota{velocity = scalarMult b (normalize (Vec nx ny))}) balls}
+  where an = (angle*pi)/180
+        nx = -1*(p+10)*sin(an)
+        ny = -1*(p+10)*cos(an)
+        -- dis = (\ball -> distance (position ball) (Vec (x+nx) (y+ny)) < (radio ball))
+        hits = filter (dis (Vec (x+nx) (y+ny))) balls
+        pelota = head hits
 
 drawOneBall :: Ball -> Picture
 drawOneBall (Ball _ r _ _ col _ _ (Vec x y) ) = translate x y $  G.color ballColor $ G.circleSolid r
@@ -100,7 +116,7 @@ handleEvent event state
     State pelotas (Taco z  p (Vec d e) (Vec a b) r ) table <- state
   = State pelotas (Taco z  p (Vec  d e)   (Vec a (controlSizeTacoDown b)) r ) table
   | EventKey (Char 'q') Down _ (x,y) <- event,
-    State  pelotas (Taco z  p (Vec d e) (Vec a b) r ) table <- state
+    (State  pelotas (Taco z  p (Vec d e) (Vec a b) r ) table) <- hitTaco state (x,y)
   = State pelotas (Taco  z (p+10) (Vec x y) (Vec a 190) r ) table
   | EventKey (Char 'q') Up _ (x,y) <- event,
     State  pelotas (Taco  z p (Vec d e) (Vec a b) r ) table <- state
