@@ -32,7 +32,7 @@ initialGame = State initialBalls initialTaco initialTable
 --initial items in the game
 initialTaco :: Taco
 -- initialTaco = Taco (Vec 0 0) 15 (Vec 10 50) (Vec 15 200) 10
-initialTaco = Taco (Vec 0 0) 15 (Vec 10 50) (Vec 5 200) 10
+initialTaco = Taco (Vec 0 0) 15 (Vec 10 50) (Vec 5 40) 10
 
 
 initialBalls :: [Ball]
@@ -43,7 +43,7 @@ initialBalls = [(Ball 1 10 20 0.5 [1,0,0,1] (Vec 0 0) (Vec 0 0) (Vec (-50) (-10)
 
 
 initialTable :: Table
-initialTable = (Table width height)
+initialTable = (Table width height 1)
 
 
 -- | Converting the game state in a picture (Rendering process)
@@ -51,26 +51,26 @@ initialTable = (Table width height)
 
 newSize :: (Int,Int) -> State -> State
 newSize (a,b) state
-  | rx < ry = state {table = (Table na ((na*height)/width))}
-  | otherwise = state {table = (Table ((nb*width)/height) nb ) }
+  | rx < ry = state {table = (Table na ((na*height)/width) rx)}
+  | otherwise = state {table = (Table ((nb*width)/height) nb ry)}
   where na = fromIntegral a
         nb = fromIntegral b
         rx = na/width
         ry = nb/height
 
-dis :: Vec -> Ball -> Bool
-dis punta ball = (trace (show distancia) distancia)< (radio ball)
-  where distancia = distance (position ball) punta
+dis :: Table -> Vec -> Ball -> Bool
+dis (Table w h lim) (Vec npunX npunY) ball = distancia < (radio ball)
+  where punta =(Vec ((npunX*width)/w) ((npunY*height)/h))
+        distancia = distance (position ball) punta
 
 hitTaco :: State -> (Float,Float) -> State
-hitTaco estado@(State balls (Taco _ p _ (Vec _ b) angle) _) (x,y)
+hitTaco estado@(State balls (Taco _ p _ (Vec _ b) angle) tab) (x,y)
   |hits == [] = estado
   |otherwise = estado{pool = reemplazarPelota (acelBall pelota{velocity = scalarMult b (normalize (Vec nx ny))}) balls}
   where an = (angle*pi)/180
         nx = -1*(p+10)*sin(an)
         ny = -1*(p+10)*cos(an)
-        -- dis = (\ball -> distance (position ball) (Vec (x+nx) (y+ny)) < (radio ball))
-        hits = filter (dis (Vec (x+nx) (y+ny))) balls
+        hits = filter (dis tab (Vec (x+nx) (y+ny))) balls
         pelota = head hits
 
 drawOneBall :: Ball -> Picture
@@ -78,10 +78,10 @@ drawOneBall (Ball _ r _ _ col _ _ (Vec x y) ) = translate x y $  G.color ballCol
                                where ballColor = C.makeColor (col!!0) (col!!1) (col!!2) (col!!3)
 
 toPictureTaco :: Table -> Taco -> [Picture]
-toPictureTaco (Table w h) (Taco z p (Vec x y) (Vec a b) r ) = [ translate x y $ Scale (w/width) (h/height) $ rotate r $ G.color( mixColors 40 60 green red) $ G.rectangleUpperSolid a b] ++ [ translate x y $ Scale (w/width) (h/height) $ rotate (r+180) $ G.color black  $ G.rectangleUpperSolid a p]
+toPictureTaco (Table w h _) (Taco z p (Vec x y) (Vec a b) r ) = [ translate x y $ Scale (w/width) (h/height) $ rotate r $ G.color( mixColors 40 60 green red) $ G.rectangleUpperSolid a b] ++ [ translate x y $ Scale (w/width) (h/height) $ rotate (r+180) $ G.color black  $ G.rectangleUpperSolid a p]
                                
 adjuste :: Table -> Picture -> Picture
-adjuste (Table w h) pic = Scale (w/width) (h/height) pic
+adjuste (Table w h _) pic = Scale (w/width) (h/height) pic
 
 toPicture :: State -> Picture
 toPicture (State pelotas tac tab) = pictures $ [adjuste tab (pictures $ mesa ++ map drawOneBall pelotas)] ++ (toPictureTaco tab tac)
@@ -127,12 +127,12 @@ handleEvent event state
 
 controlSizeTacoUp :: Float -> Float
 controlSizeTacoUp x
-  | x > 300 = 300
+  | x > 150 = 150
   | otherwise = x+5
 
 controlSizeTacoDown :: Float -> Float
 controlSizeTacoDown x
-  | x < 200 = 200
+  | x < 20 = 20
   | otherwise = x-5
 
 -- | Main --------------------------------------------------------------------------------------------------------------
@@ -167,6 +167,7 @@ data Taco = Taco {accel :: Vec,
 
 
 data Table = Table {tableWidth ::  Float,
-                    tableHeight :: Float
+                    tableHeight :: Float,
+                    limit :: Float
                   }deriving (Show, Eq)
 
